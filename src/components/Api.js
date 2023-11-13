@@ -6,7 +6,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 export async function fetchMovies(endPoint) {
   const url = BASE_URL + endPoint + `&api_key=${API_KEY}`;
   const response = await axios.get(url);
-  console.log(response.data);
+
   return response.data;
 }
 
@@ -21,6 +21,6 @@ export async function fetchMovieById(movieId) {
     },
   };
   const response = await axios.request(options);
-  console.log(response.data);
+
   return response.data;
 }

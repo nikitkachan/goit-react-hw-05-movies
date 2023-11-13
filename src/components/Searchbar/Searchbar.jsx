@@ -7,7 +7,6 @@ export const SearchBar = ({ onSubmit }) => {
     e.preventDefault();
     const searchWord = e.currentTarget[1].value;
     const value = e.currentTarget.elements.searchKey.value;
-    console.log(value);
 
     if (searchWord.trim() === '') {
       Notiflix.Notify.failure('Please, enter something!', {

@@ -8,7 +8,7 @@ const Reviews = () => {
   const [reviews, setReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  console.log(reviews);
+
   const { movieId } = useParams();
 
   useEffect(() => {
