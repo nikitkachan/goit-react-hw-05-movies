@@ -1,14 +1,11 @@
 import { fetchMovies } from 'components/Api';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
+import MovieList from 'components/MovieList/MovieList';
 import { SearchBar } from 'components/Searchbar/Searchbar';
-import {
-  StyledGalleryItem,
-  StyledUl,
-  StyledWrapper,
-} from 'pages/HomePage/HomePage.styled';
+import { StyledWrapper } from 'pages/HomePage/HomePage.styled';
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
 
 const Movies = () => {
@@ -85,39 +82,13 @@ const Movies = () => {
           Oops, some error occured... Error message: {error}
         </p>
       )}
-      <StyledUl>
-        {movies.map(movie => (
-          <StyledGalleryItem key={movie.id}>
-            <Link
-              state={{ from: location }}
-              key={movie.id}
-              to={`/movies/${movie.id}`}
-            >
-              {movie.poster_path !== null && (
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  width="300"
-                  height="450"
-                />
-              )}
-              {movie.poster_path === null && (
-                <img
-                  src="https://static.vecteezy.com/system/resources/previews/005/337/799/large_2x/icon-image-not-found-free-vector.jpg"
-                  alt={movie.title}
-                  width="300"
-                  height="450"
-                />
-              )}
-              <h3>{movie.title || movie.name || movie.original_name}</h3>
-            </Link>
-          </StyledGalleryItem>
-        ))}
-      </StyledUl>
-      {isLoading && <Loader />}
-      {movies !== [] && isShown && (
-        <Button onLoadMoreHandler={onLoadMoreHandler} />
-      )}
+      <MovieList movies={movies} location={location} />
+      <div className="btnWrapper">
+        {isLoading && <Loader />}
+        {movies !== [] && isShown && (
+          <Button onLoadMoreHandler={onLoadMoreHandler} />
+        )}
+      </div>
     </StyledWrapper>
   );
 };

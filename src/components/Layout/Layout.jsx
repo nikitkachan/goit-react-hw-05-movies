@@ -1,7 +1,7 @@
 import { StyledLink } from 'pages/HomePage/HomePage.styled';
 import { StyledHeader } from './Layout.styled';
 
-const Layout = ({ children, onSubmit }) => {
+const Layout = ({ children }) => {
   return (
     <div>
       <StyledHeader>

@@ -1,10 +1,11 @@
 import { fetchMovies } from 'components/Api';
 import { useEffect, useState } from 'react';
-import { StyledGalleryItem, StyledUl, StyledWrapper } from './HomePage.styled';
+import { StyledWrapper } from './HomePage.styled';
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
 import { animateScroll } from 'react-scroll';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import MovieList from 'components/MovieList/MovieList';
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -66,25 +67,7 @@ const HomePage = () => {
         </p>
       )}
       <h1>Trending movies</h1>
-      <StyledUl>
-        {movies.map(movie => (
-          <StyledGalleryItem key={movie.id}>
-            <Link
-              state={{ from: location }}
-              key={movie.id}
-              to={`/movies/${movie.id}`}
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                width="300"
-                height="450"
-              />
-              <h3>{movie.title || movie.name || movie.original_name}</h3>
-            </Link>
-          </StyledGalleryItem>
-        ))}
-      </StyledUl>
+      <MovieList movies={movies} location={location} />
       <div className="btnWrapper">
         {isLoading && <Loader />}
         {movies !== [] && isShown && (
